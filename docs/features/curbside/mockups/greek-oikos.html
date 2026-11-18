@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oikos mockup: Black figure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Commissioner:wght@400;500;600;700&display=swap">
+<style>
+*{box-sizing:border-box;margin:0}
+html,body{background:var(--page);color:var(--page-ink)}
+body{min-height:100vh;padding:40px 32px 64px;-webkit-font-smoothing:antialiased}
+.deck{max-width:1760px;margin:0 auto}
+.deck__head{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;justify-content:space-between;margin-bottom:36px}
+.deck__head p{max-width:72ch;line-height:1.55;margin-top:8px}
+.theme{display:inline-flex;border:1.5px solid currentColor}
+.theme button{font:inherit;font-size:13px;letter-spacing:.06em;text-transform:uppercase;padding:10px 14px;min-height:44px;
+  background:transparent;color:inherit;border:0;cursor:pointer}
+.theme button+button{border-left:1.5px solid currentColor}
+.theme button[aria-pressed=true]{background:var(--page-ink);color:var(--page)}
+.theme button:hover:not([aria-pressed=true]){background:color-mix(in srgb,var(--page-ink) 12%,transparent)}
+.theme button:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.screens{display:flex;flex-wrap:wrap;gap:44px 36px;justify-content:center}
+figure.shot{display:flex;flex-direction:column;gap:14px;width:390px}
+figure.shot figcaption{font-size:13px;line-height:1.5;opacity:.85}
+figure.shot figcaption b{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:1;margin-bottom:2px}
+.phone{position:relative;width:390px;height:844px;border-radius:54px;overflow:hidden;background:var(--bg);color:var(--ink);
+  box-shadow:0 0 0 10px var(--bezel),0 0 0 11px color-mix(in srgb,var(--bezel) 60%,var(--page)),0 30px 60px -20px rgba(10,14,24,.45);
+  display:flex;flex-direction:column;isolation:isolate}
+.status{height:47px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:6px 30px 0 44px;
+  font:600 16px/1 -apple-system,"SF Pro Text",system-ui,sans-serif;position:relative;z-index:5}
+.island{position:absolute;top:11px;left:50%;width:124px;height:36px;margin-left:-62px;border-radius:20px;background:#0b0b0d;z-index:6}
+.homebar{position:absolute;bottom:8px;left:50%;width:134px;height:5px;margin-left:-67px;border-radius:3px;background:currentColor;opacity:.85;z-index:6}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+:root{color-scheme:light;--page:#eddcc6;--page-ink:#2a1a12;--bezel:#1d140f;--focus:#1f5d86;--bg:#f5e9d8;--surface:#fbf4e9;--ink:#2a1a12;--ink2:#6c4f3d;--rule:rgba(42,26,18,.16);--ground:#cf7447;--lot:rgba(36,22,16,.55);--band:#e0a074;--figure:#231611;--incise:#eab48b;--figure-acc:rgba(35,22,17,.5);--label:#231611;--label-halo:#cf7447;--reserve:#f2d7b6;--clay:#c25e33;--clay-ink:#9d4520;--on-figure:#f2d2b0;--shard:#f0dbbd;--aegean:#1f5d86;--sel:#f6dcb7;}@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--page:#110c0a;--page-ink:#f0dcc4;--bezel:#050302;--focus:#7fb6dc;--bg:#18110e;--surface:#221813;--ink:#f3e3cf;--ink2:#c4a68f;--rule:rgba(243,227,207,.14);--ground:#16100d;--lot:rgba(215,119,74,.5);--band:#21170f;--figure:#d4744a;--incise:#1a110d;--figure-acc:rgba(212,116,74,.45);--label:#eb9d72;--label-halo:#16100d;--reserve:#2b1d16;--clay:#e0814f;--clay-ink:#f09a6b;--on-figure:#1a110d;--shard:#e7caa2;--aegean:#7fb6dc;--sel:#3a271c;}}:root[data-theme=dark]{color-scheme:dark;--page:#110c0a;--page-ink:#f0dcc4;--bezel:#050302;--focus:#7fb6dc;--bg:#18110e;--surface:#221813;--ink:#f3e3cf;--ink2:#c4a68f;--rule:rgba(243,227,207,.14);--ground:#16100d;--lot:rgba(215,119,74,.5);--band:#21170f;--figure:#d4744a;--incise:#1a110d;--figure-acc:rgba(212,116,74,.45);--label:#eb9d72;--label-halo:#16100d;--reserve:#2b1d16;--clay:#e0814f;--clay-ink:#f09a6b;--on-figure:#1a110d;--shard:#e7caa2;--aegean:#7fb6dc;--sel:#3a271c;}
+:root{--incise-fig:var(--incise)}
+body{font-family:Commissioner,sans-serif}
+.deck__head h1{font:400 48px/1 Marcellus,serif;letter-spacing:.04em}
+.deck__head h1 span{font-size:.55em;color:var(--ink2);letter-spacing:.14em;text-transform:uppercase;margin-left:10px}
+.deck__head p{font-size:15px}
+.phone{font-family:Commissioner,sans-serif}
+.frieze{height:16px;flex:none;position:relative}
+.frieze svg{display:block;width:100%;height:16px}
+.phone>.status{background:var(--bg)}
+.top__row>div:last-child{display:flex}
+/* map */
+.map-svg{display:block;width:100%;height:100%}
+.ground{fill:var(--ground)}
+.band{fill:var(--band)}
+.lot{fill:transparent;stroke:var(--lot);stroke-width:1;transition:fill .15s}
+.lot--ghost{stroke-dasharray:3 3;opacity:.6}
+.house{fill:var(--figure)}
+.house--ghost{fill:none;stroke:var(--lot);stroke-width:1;stroke-dasharray:3 3}
+.incise{fill:none;stroke:var(--incise);stroke-width:.7}
+.acc{fill:none;stroke:var(--figure);stroke-width:1.3}
+.med{fill:var(--reserve);stroke:var(--figure);stroke-width:1.3}
+.med-ring{fill:none;stroke:var(--figure);stroke-width:.5}
+.med--you{fill:var(--clay);stroke:var(--figure);stroke-width:1.4}
+.med-house{fill:var(--reserve)}
+.med-empty{fill:none;stroke:var(--label);stroke-width:1;stroke-dasharray:2.2 2}
+.plus{stroke:var(--label);stroke-width:1.3}
+.t-med{font:400 9.5px Marcellus;fill:var(--figure)}
+.t-name{font:600 9.6px Commissioner;fill:var(--label);paint-order:stroke;stroke:var(--label-halo);stroke-width:2.6px;letter-spacing:.01em}
+.t-you{font-weight:700}
+.t-empty{font-weight:500;opacity:.85}
+.t-street{font:400 9.5px Marcellus;letter-spacing:.3em;fill:var(--label);paint-order:stroke;stroke:var(--band);stroke-width:5px}
+.t-far{opacity:.6}
+.shard polygon{fill:var(--shard);stroke:#2a1a12;stroke-width:.8}
+.shard text{font-family:Marcellus;fill:#2a1a12;letter-spacing:.08em}
+.parcel{cursor:pointer;outline:none}
+.parcel:hover .lot{fill:color-mix(in srgb,var(--sel) 40%,transparent)}
+.parcel:focus-visible .lot{stroke:var(--focus);stroke-width:2.6;fill:color-mix(in srgb,var(--sel) 40%,transparent)}
+.parcel:active .lot{fill:color-mix(in srgb,var(--sel) 70%,transparent)}
+.parcel.is-selected .lot{fill:color-mix(in srgb,var(--sel) 55%,transparent);stroke:var(--figure);stroke-width:2}
+/* chrome */
+.mapwrap{position:absolute;inset:0;z-index:0}
+.top{position:relative;z-index:3;flex:none;background:var(--bg);border-bottom:1.5px solid var(--figure)}
+.top__row{display:flex;align-items:center;justify-content:space-between;padding:4px 14px 8px}
+.top__row h1{font:400 25px/1.05 Marcellus,serif}
+.top__row small{display:block;font:600 10px Commissioner;letter-spacing:.24em;color:var(--clay-ink);margin-bottom:2px}
+.roundbtn{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--figure);background:var(--surface);color:var(--ink);cursor:pointer}
+.roundbtn+.roundbtn{margin-left:8px}
+.roundbtn:hover{background:var(--reserve)}
+.roundbtn:focus-visible,.btn:focus-visible,.row:focus-visible,.cap:focus-visible,.back:focus-visible,.chk input:focus-visible+span{outline:3px solid var(--focus);outline-offset:2px}
+.keyline{position:absolute;left:14px;bottom:118px;z-index:3;display:flex;gap:10px;align-items:center;background:var(--surface);border:1.5px solid var(--figure);padding:6px 10px;font-size:11px;color:var(--ink)}
+.keyline svg{display:block}
+.attrib{position:absolute;right:12px;bottom:120px;font-size:8.5px;color:var(--ink2);background:var(--surface);padding:1px 4px;z-index:3}
+.dock{position:absolute;left:0;right:0;bottom:0;z-index:4;background:var(--bg);border-top:1.5px solid var(--figure);padding:0 0 30px}
+.dock__row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;padding:10px 16px 0}
+.btn{min-height:48px;display:flex;align-items:center;justify-content:center;gap:8px;font:600 14px Commissioner;border:1.5px solid var(--figure);
+  background:var(--surface);color:var(--ink);cursor:pointer;padding:0 14px;border-radius:24px;white-space:nowrap}
+.btn:hover{background:var(--reserve)}
+.btn:active{transform:translateY(1px)}
+.btn--glaze{background:var(--figure);color:var(--on-figure)}
+.btn--glaze:hover{background:color-mix(in srgb,var(--figure) 85%,var(--clay))}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.cap{width:72px;height:72px;border-radius:50%;margin-top:-34px;background:var(--figure);color:var(--on-figure);border:0;display:grid;place-items:center;cursor:pointer;
+  box-shadow:0 0 0 4px var(--bg),0 0 0 5.5px var(--figure)}
+.cap:hover{background:color-mix(in srgb,var(--figure) 85%,var(--clay))}
+.cap:active{transform:scale(.97)}
+.cap svg{width:28px;height:28px}
+.dock__lbl{font:600 10px Commissioner;letter-spacing:.2em;text-align:center;color:var(--ink2);margin-top:4px}
+/* card */
+.bar{flex:none;display:flex;align-items:center;justify-content:space-between;padding:2px 12px 8px}
+.back{display:flex;align-items:center;gap:8px;font:600 15px Commissioner;color:var(--ink);background:none;border:0;min-height:44px;padding:0 8px;cursor:pointer;border-radius:22px}
+.back:hover{background:var(--reserve)}
+.scroll{flex:1;overflow:hidden;position:relative}
+.vase{margin:0 14px;background:var(--figure);color:var(--on-figure);text-align:center;position:relative}
+.vase__med{width:58px;height:58px;border-radius:50%;margin:16px auto 8px;display:grid;place-items:center;background:var(--on-figure);color:var(--figure);
+  font:400 30px/1 Marcellus;box-shadow:0 0 0 3px var(--figure),0 0 0 4.5px var(--on-figure)}
+.vase h2{font:400 34px/1.05 Marcellus,serif;letter-spacing:.01em}
+.vase p{font-size:13px;margin-top:4px;opacity:.85}
+.vase .ostra{position:absolute;right:14px;top:30px;transform:rotate(9deg);background:var(--shard);color:#2a1a12;font:400 13px/1.15 Marcellus;letter-spacing:.1em;padding:8px 14px 9px 12px;text-align:center;
+  clip-path:polygon(4% 10%,30% 0,72% 6%,100% 0,96% 70%,82% 100%,30% 92%,0 100%)}
+.vase .ostra small{display:block;font:600 9px Commissioner;letter-spacing:.06em}
+.sect{margin:0 14px;padding:11px 0 7px;border-bottom:1px solid var(--rule)}
+.sect h3{font:600 10.5px Commissioner;letter-spacing:.24em;color:var(--clay-ink);margin-bottom:8px;text-transform:uppercase}
+.who{display:grid;grid-template-columns:30px 1fr auto;gap:10px;align-items:center;padding:4px 0}
+.who__fig{color:var(--figure);--incise-fig:var(--bg)}
+.who b{display:block;font:400 19px/1.15 Marcellus}
+.who span{display:block;font-size:12.5px;color:var(--ink2);line-height:1.4}
+.age{font:600 12px Commissioner;border:1.5px solid var(--figure);border-radius:14px;padding:3px 9px;white-space:nowrap}
+.note{display:grid;grid-template-columns:52px 1fr;gap:10px;padding:5px 0;font-size:13px;line-height:1.45}
+.note time{font:600 11px Commissioner;color:var(--clay-ink);letter-spacing:.06em;padding-top:2px}
+.note time small{display:block;font-weight:500;color:var(--ink2);letter-spacing:.1em;font-size:9px}
+.actions{position:absolute;left:0;right:0;bottom:0;padding:12px 14px 30px;display:grid;grid-template-columns:1.4fr 1fr;gap:10px;background:linear-gradient(to top,var(--bg) 78%,transparent)}
+/* near */
+.tondo{flex:none;height:292px;display:grid;place-items:center;position:relative}
+.tondo__cup{width:266px;height:266px;border-radius:50%;overflow:hidden;position:relative;box-shadow:0 0 0 2px var(--figure)}
+.tondo__cup svg{display:block;width:100%;height:100%}
+.tondo__ring{position:absolute;inset:0;margin:auto;width:290px;height:290px;pointer-events:none}
+.compass{position:absolute;right:20px;top:14px;font:400 14px Marcellus;color:var(--ink2);text-align:center;line-height:1.2}
+.compass b{display:block;font-size:22px;color:var(--ink)}
+.trav{stroke:var(--aegean);stroke-width:1.4;stroke-dasharray:3 2.5;fill:none}
+.you{fill:var(--aegean);stroke:var(--reserve);stroke-width:2}
+.cone{fill:var(--aegean);opacity:.22}
+.sheet{flex:1;background:var(--surface);border-top:1.5px solid var(--figure);position:relative;overflow:hidden}
+.sheet__head{padding:8px 16px 8px;display:flex;justify-content:space-between;align-items:baseline}
+.sheet__head h2{font:400 22px Marcellus}
+.sheet__head p{font-size:11.5px;color:var(--ink2)}
+.rows{list-style:none;padding:0}
+.row{width:100%;display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:start;text-align:left;padding:9px 16px;background:transparent;border:0;border-top:1px solid var(--rule);color:var(--ink);font:inherit;cursor:pointer}
+.row:hover{background:var(--reserve)}
+.row:active{background:color-mix(in srgb,var(--clay) 25%,transparent)}
+.row.is-first{background:var(--reserve)}
+.rmed{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:400 15px Marcellus;background:var(--figure);color:var(--on-figure)}
+.row__name{display:block;font:400 19px/1.1 Marcellus}
+.row__who{display:block;font-size:12px;line-height:1.4;margin-top:2px}
+.row__who em{font-style:normal;color:var(--ink2)}
+.row__flag{display:inline-block;margin-top:5px;font:600 11px Commissioner;color:var(--clay-ink)}
+.row__flag::before{content:"";display:inline-block;width:6px;height:6px;background:currentColor;transform:rotate(45deg);margin:0 7px 1px 1px}
+.row__dist{text-align:right;font:600 16px Commissioner}
+.row__dist small{display:block;font:500 10.5px Commissioner;color:var(--ink2)}
+.side{display:inline-flex;align-items:center;gap:4px;font:700 11px Commissioner;letter-spacing:.1em;text-transform:uppercase;color:var(--clay-ink)}
+/* capture */
+.disc{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;margin:0 14px;padding:8px 14px;background:var(--figure);color:var(--on-figure);border-radius:40px}
+.disc__mic{width:48px;height:48px;border-radius:50%;background:var(--on-figure);color:var(--figure);display:grid;place-items:center}
+.disc svg.wave{width:100%;height:28px}
+.disc small{display:flex;justify-content:space-between;font:600 10.5px Commissioner;letter-spacing:.12em;margin-top:4px;opacity:.85}
+.tablet{margin:10px 14px 0;font-size:13.5px;line-height:1.6;padding:10px 14px;background:var(--surface);border:1.5px solid var(--figure)}
+.tablet h3,.ops h3{font:600 10.5px Commissioner;letter-spacing:.24em;color:var(--clay-ink);margin-bottom:6px;text-transform:uppercase}
+mark{background:color-mix(in srgb,var(--clay) 22%,transparent);color:inherit;padding:0 2px;border-bottom:1.5px solid var(--clay)}
+mark sup{font:700 9px Commissioner;color:var(--clay-ink);margin-left:2px}
+mark.miss{background:none;border-bottom:1.5px dashed var(--ink2)}
+.ops{margin:12px 14px 0;padding-bottom:120px}
+.op{display:grid;grid-template-columns:30px 1fr;gap:10px;padding:6px 0;border-top:1px solid var(--rule)}
+.chk{position:relative;display:block;width:26px;height:26px}
+.chk input{position:absolute;inset:-9px;width:44px;height:44px;opacity:0;margin:0;cursor:pointer}
+.chk span{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--figure);background:var(--surface)}
+.chk input:checked+span{background:var(--figure);color:var(--on-figure)}
+.chk input:checked+span::after{content:"";width:10px;height:5px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-1px) rotate(-45deg)}
+.chk input:hover+span{box-shadow:0 0 0 3px color-mix(in srgb,var(--clay) 35%,transparent)}
+.op__k{font:600 10.5px Commissioner;letter-spacing:.08em;color:var(--ink2);display:flex;gap:6px;align-items:center}
+.op__k i{font:normal 400 11px Marcellus;width:17px;height:17px;border-radius:50%;background:var(--figure);color:var(--on-figure);display:inline-grid;place-items:center}
+.op__t{font:400 16px/1.3 Marcellus;margin-top:1px}
+.op__t del{color:var(--ink2);text-decoration-color:var(--clay);text-decoration-thickness:2px}
+.op__t ins{text-decoration:none;color:var(--aegean);border-bottom:2px solid var(--aegean)}
+.op__ev{font-size:11.5px;color:var(--ink2);margin-top:2px}
+.op--warn .op__k::after{content:"Check this";color:var(--clay-ink);font-weight:700;letter-spacing:.08em}
+.unres{margin-top:10px;background:var(--shard);color:#2a1a12;padding:12px 14px;clip-path:polygon(0 6%,22% 0,64% 4%,100% 0,98% 88%,70% 100%,26% 94%,2% 100%);font-size:13px}
+.unres b{display:block;font:400 15px Marcellus;letter-spacing:.06em}
+.unres button{margin-top:8px;font:600 13px Commissioner;min-height:44px;padding:0 16px;border-radius:22px;border:1.5px solid #2a1a12;background:transparent;color:#2a1a12;cursor:pointer}
+.unres button:hover{background:rgba(42,26,18,.08)}
+.unres button:focus-visible{outline:3px solid #1f5d86;outline-offset:2px}
+</style>
+</head>
+<body>
+<main class="deck">
+<header class="deck__head"><div><h1>Oikos <span>Black figure, red figure</span></h1>
+<p>The street painted on a pot. Houses are glaze figures with incised outlines on terracotta, each household gets a Greek letter
+medallion (Α, Β, Γ), and status is scratched on an ostracon, the potsherd Athenians wrote notes on. Light mode is black-figure,
+glaze on clay. Dark mode flips to red-figure, clay on glaze. Meander bands frame the chrome only; everything you read is set in
+Commissioner, with Marcellus kept for names.</p></div><div class="theme" role="group" aria-label="Color mode">
+<button type="button" data-mode="auto" aria-pressed="true">Auto</button>
+<button type="button" data-mode="light" aria-pressed="false">Light</button>
+<button type="button" data-mode="dark" aria-pressed="false">Dark</button></div></header>
+<div class="screens">
+<figure class="shot"><div class="phone"><div class="island"></div><div class="status" aria-hidden="true"><span class="status__time">9:41</span>
+<svg class="status__icons" width="70" height="12" viewBox="0 0 70 12" fill="currentColor">
+<rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="6" width="3" height="6" rx="1"/>
+<rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/>
+<path d="M30 3.2a10 10 0 0 1 13 0l-1.4 1.5a8 8 0 0 0-10.2 0zM32.6 6a6 6 0 0 1 7.8 0L39 7.5a4 4 0 0 0-5 0zM35 9h3l-1.5 2z"/>
+<rect x="46.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity=".5"/>
+<rect x="48.5" y="2.5" width="15" height="7" rx="1.5"/><rect x="68.5" y="4" width="1.5" height="4" rx=".7" opacity=".5"/>
+</svg></div><div class="top"><div class="top__row"><div><small>ΟΙΚΟΣ · OIKOS</small><h1>Quillfeather Lane</h1></div>
+<div><button class="roundbtn" type="button" aria-label="Search households"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M12.6 12.6L17 17"/></svg></button><button class="roundbtn" type="button" aria-label="Map options"><svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><circle cx="4" cy="10" r="1.7"/><circle cx="10" cy="10" r="1.7"/><circle cx="16" cy="10" r="1.7"/></svg></button></div></div><div class="frieze" aria-hidden="true"><svg viewBox="0 0 390 16" preserveAspectRatio="xMinYMid slice"><rect y="1" width="390" height="14" fill="url(#meander-fig)"/></svg></div></div>
+<div class="mapwrap"><svg class="map-svg" viewBox="0 -170 390 844" preserveAspectRatio="xMidYMid slice" role="group" aria-label="Map of Quillfeather Lane"><rect x="-60" y="-200" width="520" height="900" class="ground"/><rect x="0" y="268" width="390" height="36" class="band"/><rect x="232" y="-200" width="32" height="468" class="band"/><rect x="0" y="-52" width="232" height="32" class="band"/><rect x="0" y="500" width="390" height="36" class="band"/><rect x="0" y="283" width="390" height="6" fill="url(#beads)"/><rect x="0" y="515" width="390" height="6" fill="url(#beads)"/><rect x="0" y="-39" width="232" height="6" fill="url(#beads)"/><rect x="0" y="-20" width="116" height="116" class="lot lot--ghost"/><rect x="116" y="-20" width="116" height="116" class="lot lot--ghost"/><rect x="0" y="420" width="96" height="80" class="lot lot--ghost"/><rect x="96" y="420" width="96" height="80" class="lot lot--ghost"/><rect x="192" y="420" width="98" height="80" class="lot lot--ghost"/><rect x="290" y="420" width="100" height="80" class="lot lot--ghost"/><rect x="0" y="536" width="130" height="60" class="lot lot--ghost"/><rect x="130" y="536" width="130" height="60" class="lot lot--ghost"/><rect x="260" y="536" width="130" height="60" class="lot lot--ghost"/><polygon points="14,10 62,10 62,60 14,60" class="house house--ghost"/><polygon points="140,14 200,14 200,62 140,62" class="house house--ghost"/><polygon points="22,440 72,440 72,486 22,486" class="house house--ghost"/><polygon points="112,446 172,446 172,490 112,490" class="house house--ghost"/><polygon points="212,438 272,438 272,484 212,484" class="house house--ghost"/><polygon points="312,444 372,444 372,488 312,488" class="house house--ghost"/><polygon points="30,552 90,552 90,590 30,590" class="house house--ghost"/><polygon points="170,550 226,550 226,590 170,590" class="house house--ghost"/><polygon points="290,554 350,554 350,590 290,590" class="house house--ghost"/><text x="300" y="290" class="t-street" text-anchor="middle">QUILLFEATHER LANE</text><text transform="translate(252 140) rotate(-90)" class="t-street" text-anchor="middle">BRAMBLEWICK COURT</text><text x="116" y="-32" class="t-street t-far" text-anchor="middle">ROOK STREET</text><text x="300" y="522" class="t-street t-far" text-anchor="middle">OTTERMERE ROAD</text><a href="#card" class="parcel is-selected" aria-label="Pumpernickel household, met"><rect x="0" y="96" width="78" height="172" class="lot"/><polygon points="38,120 60,120 60,140 38,140" class="acc"/><polygon points="12,200 60,200 60,214 68,214 68,250 12,250" class="house"/><polygon points="15.961904761904762,202.73066666666668 58.476190476190474,202.73066666666668 58.476190476190474,214.93866666666668 65.56190476190476,214.93866666666668 65.56190476190476,246.33066666666667 15.961904761904762,246.33066666666667" class="incise"/><circle cx="11" cy="258" r="8.5" class="med"/><circle cx="11" cy="258" r="6.6" class="med-ring"/><text x="11" y="261.3" class="t-med" text-anchor="middle">Α</text><text x="23" y="261.4" class="t-name" textLength="54" lengthAdjust="spacingAndGlyphs">Pumpernickel</text></a><a href="#card" class="parcel" aria-label="Fizzwhistle household"><rect x="78" y="96" width="78" height="172" class="lot"/><polygon points="122,140 150,140 150,172 122,172" class="acc"/><polygon points="90,196 144,196 144,252 90,252" class="house"/><polygon points="93.2,199.2 140.8,199.2 140.8,248.8 93.2,248.8" class="incise"/><circle cx="89" cy="258" r="8.5" class="med"/><circle cx="89" cy="258" r="6.6" class="med-ring"/><text x="89" y="261.3" class="t-med" text-anchor="middle">Β</text><text x="101" y="261.4" class="t-name" textLength="54" lengthAdjust="spacingAndGlyphs">Fizzwhistle</text></a><a href="#card" class="parcel" aria-label="Quillby household, new here"><rect x="156" y="96" width="76" height="172" class="lot"/><polygon points="170,126 196,126 196,152 170,152" class="acc"/><polygon points="166,206 204,206 204,196 224,196 224,250 166,250" class="house"/><polygon points="169.53103448275863,207.3432098765432 203.33793103448275,207.3432098765432 203.33793103448275,198.5283950617284 221.13103448275862,198.5283950617284 221.13103448275862,246.12839506172838 169.53103448275863,246.12839506172838" class="incise"/><circle cx="167" cy="258" r="8.5" class="med"/><circle cx="167" cy="258" r="6.6" class="med-ring"/><text x="167" y="261.3" class="t-med" text-anchor="middle">Γ</text><text x="179" y="261.4" class="t-name">Quillby</text></a><a href="#card" class="parcel" aria-label="Thistlewaite household"><rect x="264" y="-20" width="126" height="130" class="lot"/><polygon points="356,4 378,4 378,24 356,24" class="acc"/><polygon points="278,24 332,24 332,86 278,86" class="house"/><polygon points="281.2,27.200000000000003 328.8,27.200000000000003 328.8,82.8 281.2,82.8" class="incise"/><circle cx="271" cy="98" r="8.5" class="med"/><circle cx="271" cy="98" r="6.6" class="med-ring"/><text x="271" y="101.3" class="t-med" text-anchor="middle">Δ</text><text x="283" y="101.4" class="t-name">Thistlewaite</text></a><a href="#card" class="parcel" aria-label="Lot 15, nobody recorded yet. Add a household"><rect x="264" y="110" width="66" height="158" class="lot"/><polygon points="276,190 320,190 320,250 276,250" class="house"/><polygon points="279.2,193.2 316.8,193.2 316.8,246.8 279.2,246.8" class="incise"/><circle cx="275" cy="258" r="8" class="med-empty"/><path d="M271.5 258h7M275 254.5v7" class="plus"/><text x="287" y="261.4" class="t-name t-empty">Add</text></a><a href="#card" class="parcel" aria-label="Tumbleweed household, our mower"><rect x="330" y="110" width="60" height="158" class="lot"/><polygon points="356,124 384,124 384,152 356,152" class="acc"/><polygon points="338,188 382,188 382,250 338,250" class="house"/><polygon points="341.2,191.2 378.8,191.2 378.8,246.8 341.2,246.8" class="incise"/><circle cx="341" cy="258" r="8.5" class="med"/><circle cx="341" cy="258" r="6.6" class="med-ring"/><text x="341" y="261.3" class="t-med" text-anchor="middle">Ε</text><text x="353" y="261.4" class="t-name" textLength="36" lengthAdjust="spacingAndGlyphs">Tumbleweed</text></a><a href="#card" class="parcel" aria-label="Mossbottom household"><rect x="0" y="304" width="72" height="116" class="lot"/><polygon points="10,318 60,318 60,366 10,366" class="house"/><polygon points="13.2,321.2 56.8,321.2 56.8,362.8 13.2,362.8" class="incise"/><circle cx="11" cy="314" r="8.5" class="med"/><circle cx="11" cy="314" r="6.6" class="med-ring"/><text x="11" y="317.3" class="t-med" text-anchor="middle">Ζ</text><text x="23" y="317.4" class="t-name" textLength="48" lengthAdjust="spacingAndGlyphs">Mossbottom</text></a><a href="#card" class="parcel" aria-label="Crumpet household, birthday sat"><rect x="72" y="304" width="78" height="116" class="lot"/><polygon points="128,390 146,390 146,408 128,408" class="acc"/><polygon points="82,320 140,320 140,350 126,350 126,372 82,372" class="house"/><polygon points="85.75172413793103,323.36410256410255 137.35172413793103,323.36410256410255 137.35172413793103,349.6717948717949 124.89655172413794,349.6717948717949 124.89655172413794,368.9641025641026 85.75172413793103,368.9641025641026" class="incise"/><circle cx="83" cy="314" r="8.5" class="med"/><circle cx="83" cy="314" r="6.6" class="med-ring"/><text x="83" y="317.3" class="t-med" text-anchor="middle">Η</text><text x="95" y="317.4" class="t-name">Crumpet</text></a><a href="#card" class="parcel" aria-label="Lot 23, your house"><rect x="150" y="304" width="82" height="116" class="lot"/><polygon points="160,318 222,318 222,372 160,372" class="house"/><polygon points="163.2,321.2 218.8,321.2 218.8,368.8 163.2,368.8" class="incise"/><circle cx="161" cy="314" r="9" class="med med--you"/><path d="M156.5 317V313l4.5-3.6 4.5 3.6V317z" class="med-house"/><text x="174" y="317.5" class="t-name t-you">Your oikos</text></a><a href="#card" class="parcel" aria-label="Hobnob · Wigglesworth household"><rect x="232" y="304" width="78" height="116" class="lot"/><polygon points="276,392 304,392 304,414 276,414" class="acc"/><polygon points="242,320 302,320 302,370 242,370" class="house"/><polygon points="245.2,323.2 298.8,323.2 298.8,366.8 245.2,366.8" class="incise"/><path d="M272 323V367" class="incise"/><circle cx="243" cy="314" r="8.5" class="med"/><circle cx="243" cy="314" r="6.6" class="med-ring"/><text x="243" y="317.3" class="t-med" text-anchor="middle">Ι</text><text x="255" y="317.4" class="t-name">Hobnob +1</text></a><a href="#card" class="parcel" aria-label="Lot 25, nobody recorded yet. Add a household"><rect x="310" y="304" width="80" height="116" class="lot"/><polygon points="320,316 380,316 380,360 354,360 354,378 320,378" class="house"/><polygon points="323.34222222222223,319.64731182795697 376.9422222222222,319.64731182795697 376.9422222222222,359.10537634408604 353.71555555555557,359.10537634408604 353.71555555555557,375.247311827957 323.34222222222223,375.247311827957" class="incise"/><circle cx="321" cy="314" r="8" class="med-empty"/><path d="M317.5 314h7M321 310.5v7" class="plus"/><text x="333" y="317.4" class="t-name t-empty">Add</text></a><g transform="translate(40 165) rotate(-8)" class="shard"><polygon points="-14.905000000000001,-7.25 -7.905000000000001,-11.25 4.4715,-9.25 12.905000000000001,-12.25 16.905,6.25 5.905000000000001,11.25 -2.9810000000000003,9.25 -12.905000000000001,11.25"/><text y="3.1" text-anchor="middle" font-size="8.5">MET</text></g><g transform="translate(196 172) rotate(6)" class="shard"><polygon points="-28.08,-7.25 -21.08,-11.25 8.424,-9.25 26.08,-12.25 30.08,6.25 19.08,11.25 -5.616,9.25 -26.08,11.25"/><text y="3.1" text-anchor="middle" font-size="8.5">NEW HERE</text></g><g transform="translate(359 172) rotate(-5)" class="shard"><polygon points="-30.715,-7.25 -23.715,-11.25 9.2145,-9.25 28.715,-12.25 32.715,6.25 21.715,11.25 -6.143000000000001,9.25 -28.715,11.25"/><text y="3.1" text-anchor="middle" font-size="8.5">OUR MOWER</text></g><g transform="translate(106 388) rotate(4)" class="shard"><polygon points="-38.620000000000005,-7.25 -31.620000000000005,-11.25 11.586,-9.25 36.620000000000005,-12.25 40.620000000000005,6.25 29.620000000000005,11.25 -7.724000000000001,9.25 -36.620000000000005,11.25"/><text y="3.1" text-anchor="middle" font-size="8.5">BIRTHDAY SAT</text></g></svg></div>
+<div class="keyline" aria-hidden="true"><svg width="20" height="20" viewBox="-10 -10 20 20"><circle r="8.5" class="med"/><circle r="6.6" class="med-ring"/><text y="3.3" class="t-med" text-anchor="middle">Α</text></svg>household<svg width="34" height="18" viewBox="-17 -9 34 18"><polygon points="-15,-6 -6,-9 9,-7 15,-8 16,4 6,9 -10,8 -15,8" class="shard" style="fill:var(--shard);stroke:#2a1a12;stroke-width:.8"/></svg>status</div><div class="attrib">© OpenStreetMap contributors</div>
+<nav class="dock" aria-label="Main"><div class="frieze" aria-hidden="true"><svg viewBox="0 0 390 16" preserveAspectRatio="xMinYMid slice"><rect y="1" width="390" height="14" fill="url(#meander-fig)"/></svg></div><div class="dock__row"><button class="btn" type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="M10 5.5l3 7.5-3-1.6-3 1.6z" fill="currentColor"/></svg>Near me</button>
+<div><button class="cap" type="button" aria-label="Capture by voice or text"><svg width="22" height="22" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="7" y="2" width="6" height="10" rx="3"/><path d="M4 9.5a6 6 0 0 0 12 0M10 15.5V18M7 18h6"/></svg></button><div class="dock__lbl" aria-hidden="true">TELL IT</div></div>
+<button class="btn" type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h9"/></svg>Households</button></div></nav><div class="homebar"></div></div><figcaption><b>01 · The street on a pot</b>Glaze houses with incised outlines on a terracotta ground. Medallions mark recorded households, a dashed ring marks an empty lot. Ostraca carry status. The Pumpernickel lot is selected.</figcaption></figure><figure class="shot"><div class="phone"><div class="island"></div><div class="status" aria-hidden="true"><span class="status__time">9:41</span>
+<svg class="status__icons" width="70" height="12" viewBox="0 0 70 12" fill="currentColor">
+<rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="6" width="3" height="6" rx="1"/>
+<rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/>
+<path d="M30 3.2a10 10 0 0 1 13 0l-1.4 1.5a8 8 0 0 0-10.2 0zM32.6 6a6 6 0 0 1 7.8 0L39 7.5a4 4 0 0 0-5 0zM35 9h3l-1.5 2z"/>
+<rect x="46.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity=".5"/>
+<rect x="48.5" y="2.5" width="15" height="7" rx="1.5"/><rect x="68.5" y="4" width="1.5" height="4" rx=".7" opacity=".5"/>
+</svg></div><div class="bar"><button class="back" type="button"><svg width="11" height="18" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 2L2 10l8 8"/></svg>Map</button>
+<button class="roundbtn" type="button" aria-label="Household options"><svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><circle cx="4" cy="10" r="1.7"/><circle cx="10" cy="10" r="1.7"/><circle cx="16" cy="10" r="1.7"/></svg></button></div>
+<div class="scroll"><section class="vase"><div class="frieze" aria-hidden="true"><svg viewBox="0 0 390 16" preserveAspectRatio="xMinYMid slice"><rect y="1" width="390" height="14" fill="url(#meander-on)"/></svg></div><div class="vase__med">Α</div>
+<h2>The Pumpernickels</h2><p>11 Quillfeather Lane · talked 6 days ago</p>
+<div class="ostra" aria-label="Status: met November 10">MET<small>Nov 10</small></div>
+<div style="margin-top:16px"><div class="frieze" aria-hidden="true"><svg viewBox="0 0 390 16" preserveAspectRatio="xMinYMid slice"><rect y="1" width="390" height="14" fill="url(#meander-on)"/></svg></div></div></section>
+<section class="sect"><h3>Adults</h3>
+<div class="who"><span class="who__fig"><svg width="26" height="30" viewBox="0 0 26 30" aria-hidden="true"><circle cx="13" cy="5" r="3.6" fill="currentColor"/><path d="M8.5 10h9l1.6 6-2.2.6 1.8 12.4H7.3l1.8-12.4-2.2-.6z" fill="currentColor"/><path d="M10 13.5l3 3 3-3M13 16.5v11" style="stroke:var(--incise-fig)" stroke-width=".8" fill="none"/></svg></span><div><b>Barnaby</b><span>Builds birdhouses. Owns a table saw.</span></div></div>
+<div class="who"><span class="who__fig"><svg width="26" height="30" viewBox="0 0 26 30" aria-hidden="true"><circle cx="13" cy="5" r="3.6" fill="currentColor"/><path d="M8.5 10h9l1.6 6-2.2.6 1.8 12.4H7.3l1.8-12.4-2.2-.6z" fill="currentColor"/><path d="M10 13.5l3 3 3-3M13 16.5v11" style="stroke:var(--incise-fig)" stroke-width=".8" fill="none"/></svg></span><div><b>Clementine</b><span>Training for the spring half marathon.</span></div></div></section>
+<section class="sect"><h3>Kids</h3>
+<div class="who"><span class="who__fig"><svg width="26" height="30" viewBox="0 0 26 30" aria-hidden="true"><circle cx="13" cy="11.5" r="3" fill="currentColor"/><path d="M9.6 15.6h6.8l1.2 4.4-1.6.4 1.3 8.6H8.7l1.3-8.6-1.6-.4z" fill="currentColor"/><path d="M13 19v9" style="stroke:var(--incise-fig)" stroke-width=".8"/></svg></span><div><b>Juniper</b><span>Collects rocks. Ask about the geode.</span></div><span class="age">8 · 2018</span></div>
+<div class="who"><span class="who__fig"><svg width="26" height="30" viewBox="0 0 26 30" aria-hidden="true"><circle cx="13" cy="11.5" r="3" fill="currentColor"/><path d="M9.6 15.6h6.8l1.2 4.4-1.6.4 1.3 8.6H8.7l1.3-8.6-1.6-.4z" fill="currentColor"/><path d="M13 19v9" style="stroke:var(--incise-fig)" stroke-width=".8"/></svg></span><div><b>Odo</b><span>Birth year is a guess</span></div><span class="age">~5 · 2021</span></div></section>
+<section class="sect"><h3>Pets</h3>
+<div class="who"><span class="who__fig"><svg width="34" height="30" viewBox="0 0 34 30" aria-hidden="true"><path d="M3 15c2-1 4-1 6-1h12l2-4c1-2 3-3 5-2l3 2-1 2-2 .3-1 4.7-1 3v7h-2.2l-.6-5H12l-1.4 5H8.4l.4-6-2-2c-1.8.5-3 .2-4.8-1.5z" fill="currentColor"/><path d="M26 9.5l-1.5 5" style="stroke:var(--incise-fig)" stroke-width=".8"/><path d="M12 17.5c3 1 6 1 9 0" style="stroke:var(--incise-fig)" stroke-width=".8" fill="none"/></svg></span><div><b>Waffles</b><span>Basset hound. Barks at the mail truck, nothing else.</span></div></div></section>
+<section class="sect" style="border:0"><h3>Notes</h3>
+<div class="note"><time>NOV 10<small>VOICE</small></time><p>Clementine's mom is staying through Thanksgiving.</p></div>
+<div class="note"><time>OCT 2<small>TEXT</small></time><p>Borrowed their extension ladder. Returned Oct 9.</p></div></section>
+<div class="actions"><button class="btn btn--glaze" type="button"><svg width="22" height="22" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="7" y="2" width="6" height="10" rx="3"/><path d="M4 9.5a6 6 0 0 0 12 0M10 15.5V18M7 18h6"/></svg>Tell it something</button><button class="btn" type="button">Edit</button></div></div><div class="homebar"></div></div><figcaption><b>02 · Household</b>A vase panel for the household: letter medallion, name in Marcellus, the MET ostracon. Figures beside each person are black-figure silhouettes, adult, child and dog, so the section reads before the label does.</figcaption></figure><figure class="shot"><div class="phone"><div class="island"></div><div class="status" aria-hidden="true"><span class="status__time">9:41</span>
+<svg class="status__icons" width="70" height="12" viewBox="0 0 70 12" fill="currentColor">
+<rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="6" width="3" height="6" rx="1"/>
+<rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/>
+<path d="M30 3.2a10 10 0 0 1 13 0l-1.4 1.5a8 8 0 0 0-10.2 0zM32.6 6a6 6 0 0 1 7.8 0L39 7.5a4 4 0 0 0-5 0zM35 9h3l-1.5 2z"/>
+<rect x="46.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity=".5"/>
+<rect x="48.5" y="2.5" width="15" height="7" rx="1.5"/><rect x="68.5" y="4" width="1.5" height="4" rx=".7" opacity=".5"/>
+</svg></div><div class="tondo"><div class="tondo__cup"><svg class="map-svg" viewBox="10 196 170 170" preserveAspectRatio="xMidYMid slice" role="group" aria-label="Map of Quillfeather Lane"><rect x="-60" y="-200" width="520" height="900" class="ground"/><rect x="0" y="268" width="390" height="36" class="band"/><rect x="232" y="-200" width="32" height="468" class="band"/><rect x="0" y="-52" width="232" height="32" class="band"/><rect x="0" y="500" width="390" height="36" class="band"/><rect x="0" y="283" width="390" height="6" fill="url(#beads)"/><rect x="0" y="515" width="390" height="6" fill="url(#beads)"/><rect x="0" y="-39" width="232" height="6" fill="url(#beads)"/><rect x="0" y="-20" width="116" height="116" class="lot lot--ghost"/><rect x="116" y="-20" width="116" height="116" class="lot lot--ghost"/><rect x="0" y="420" width="96" height="80" class="lot lot--ghost"/><rect x="96" y="420" width="96" height="80" class="lot lot--ghost"/><rect x="192" y="420" width="98" height="80" class="lot lot--ghost"/><rect x="290" y="420" width="100" height="80" class="lot lot--ghost"/><rect x="0" y="536" width="130" height="60" class="lot lot--ghost"/><rect x="130" y="536" width="130" height="60" class="lot lot--ghost"/><rect x="260" y="536" width="130" height="60" class="lot lot--ghost"/><polygon points="14,10 62,10 62,60 14,60" class="house house--ghost"/><polygon points="140,14 200,14 200,62 140,62" class="house house--ghost"/><polygon points="22,440 72,440 72,486 22,486" class="house house--ghost"/><polygon points="112,446 172,446 172,490 112,490" class="house house--ghost"/><polygon points="212,438 272,438 272,484 212,484" class="house house--ghost"/><polygon points="312,444 372,444 372,488 312,488" class="house house--ghost"/><polygon points="30,552 90,552 90,590 30,590" class="house house--ghost"/><polygon points="170,550 226,550 226,590 170,590" class="house house--ghost"/><polygon points="290,554 350,554 350,590 290,590" class="house house--ghost"/><text x="300" y="290" class="t-street" text-anchor="middle">QUILLFEATHER LANE</text><text transform="translate(252 140) rotate(-90)" class="t-street" text-anchor="middle">BRAMBLEWICK COURT</text><text x="116" y="-32" class="t-street t-far" text-anchor="middle">ROOK STREET</text><text x="300" y="522" class="t-street t-far" text-anchor="middle">OTTERMERE ROAD</text><a href="#card" class="parcel" aria-label="Pumpernickel household, met"><rect x="0" y="96" width="78" height="172" class="lot"/><polygon points="38,120 60,120 60,140 38,140" class="acc"/><polygon points="12,200 60,200 60,214 68,214 68,250 12,250" class="house"/><polygon points="15.961904761904762,202.73066666666668 58.476190476190474,202.73066666666668 58.476190476190474,214.93866666666668 65.56190476190476,214.93866666666668 65.56190476190476,246.33066666666667 15.961904761904762,246.33066666666667" class="incise"/><circle cx="11" cy="258" r="8.5" class="med"/><circle cx="11" cy="258" r="6.6" class="med-ring"/><text x="11" y="261.3" class="t-med" text-anchor="middle">Α</text><text x="23" y="261.4" class="t-name" textLength="54" lengthAdjust="spacingAndGlyphs">Pumpernickel</text></a><a href="#card" class="parcel" aria-label="Fizzwhistle household"><rect x="78" y="96" width="78" height="172" class="lot"/><polygon points="122,140 150,140 150,172 122,172" class="acc"/><polygon points="90,196 144,196 144,252 90,252" class="house"/><polygon points="93.2,199.2 140.8,199.2 140.8,248.8 93.2,248.8" class="incise"/><circle cx="89" cy="258" r="8.5" class="med"/><circle cx="89" cy="258" r="6.6" class="med-ring"/><text x="89" y="261.3" class="t-med" text-anchor="middle">Β</text><text x="101" y="261.4" class="t-name" textLength="54" lengthAdjust="spacingAndGlyphs">Fizzwhistle</text></a><a href="#card" class="parcel" aria-label="Quillby household, new here"><rect x="156" y="96" width="76" height="172" class="lot"/><polygon points="170,126 196,126 196,152 170,152" class="acc"/><polygon points="166,206 204,206 204,196 224,196 224,250 166,250" class="house"/><polygon points="169.53103448275863,207.3432098765432 203.33793103448275,207.3432098765432 203.33793103448275,198.5283950617284 221.13103448275862,198.5283950617284 221.13103448275862,246.12839506172838 169.53103448275863,246.12839506172838" class="incise"/><circle cx="167" cy="258" r="8.5" class="med"/><circle cx="167" cy="258" r="6.6" class="med-ring"/><text x="167" y="261.3" class="t-med" text-anchor="middle">Γ</text><text x="179" y="261.4" class="t-name">Quillby</text></a><a href="#card" class="parcel" aria-label="Thistlewaite household"><rect x="264" y="-20" width="126" height="130" class="lot"/><polygon points="356,4 378,4 378,24 356,24" class="acc"/><polygon points="278,24 332,24 332,86 278,86" class="house"/><polygon points="281.2,27.200000000000003 328.8,27.200000000000003 328.8,82.8 281.2,82.8" class="incise"/><circle cx="271" cy="98" r="8.5" class="med"/><circle cx="271" cy="98" r="6.6" class="med-ring"/><text x="271" y="101.3" class="t-med" text-anchor="middle">Δ</text><text x="283" y="101.4" class="t-name">Thistlewaite</text></a><a href="#card" class="parcel" aria-label="Lot 15, nobody recorded yet. Add a household"><rect x="264" y="110" width="66" height="158" class="lot"/><polygon points="276,190 320,190 320,250 276,250" class="house"/><polygon points="279.2,193.2 316.8,193.2 316.8,246.8 279.2,246.8" class="incise"/><circle cx="275" cy="258" r="8" class="med-empty"/><path d="M271.5 258h7M275 254.5v7" class="plus"/><text x="287" y="261.4" class="t-name t-empty">Add</text></a><a href="#card" class="parcel" aria-label="Tumbleweed household, our mower"><rect x="330" y="110" width="60" height="158" class="lot"/><polygon points="356,124 384,124 384,152 356,152" class="acc"/><polygon points="338,188 382,188 382,250 338,250" class="house"/><polygon points="341.2,191.2 378.8,191.2 378.8,246.8 341.2,246.8" class="incise"/><circle cx="341" cy="258" r="8.5" class="med"/><circle cx="341" cy="258" r="6.6" class="med-ring"/><text x="341" y="261.3" class="t-med" text-anchor="middle">Ε</text><text x="353" y="261.4" class="t-name" textLength="36" lengthAdjust="spacingAndGlyphs">Tumbleweed</text></a><a href="#card" class="parcel" aria-label="Mossbottom household"><rect x="0" y="304" width="72" height="116" class="lot"/><polygon points="10,318 60,318 60,366 10,366" class="house"/><polygon points="13.2,321.2 56.8,321.2 56.8,362.8 13.2,362.8" class="incise"/><circle cx="11" cy="314" r="8.5" class="med"/><circle cx="11" cy="314" r="6.6" class="med-ring"/><text x="11" y="317.3" class="t-med" text-anchor="middle">Ζ</text><text x="23" y="317.4" class="t-name" textLength="48" lengthAdjust="spacingAndGlyphs">Mossbottom</text></a><a href="#card" class="parcel" aria-label="Crumpet household, birthday sat"><rect x="72" y="304" width="78" height="116" class="lot"/><polygon points="128,390 146,390 146,408 128,408" class="acc"/><polygon points="82,320 140,320 140,350 126,350 126,372 82,372" class="house"/><polygon points="85.75172413793103,323.36410256410255 137.35172413793103,323.36410256410255 137.35172413793103,349.6717948717949 124.89655172413794,349.6717948717949 124.89655172413794,368.9641025641026 85.75172413793103,368.9641025641026" class="incise"/><circle cx="83" cy="314" r="8.5" class="med"/><circle cx="83" cy="314" r="6.6" class="med-ring"/><text x="83" y="317.3" class="t-med" text-anchor="middle">Η</text><text x="95" y="317.4" class="t-name">Crumpet</text></a><a href="#card" class="parcel" aria-label="Lot 23, your house"><rect x="150" y="304" width="82" height="116" class="lot"/><polygon points="160,318 222,318 222,372 160,372" class="house"/><polygon points="163.2,321.2 218.8,321.2 218.8,368.8 163.2,368.8" class="incise"/><circle cx="161" cy="314" r="9" class="med med--you"/><path d="M156.5 317V313l4.5-3.6 4.5 3.6V317z" class="med-house"/><text x="174" y="317.5" class="t-name t-you">Your oikos</text></a><a href="#card" class="parcel" aria-label="Hobnob · Wigglesworth household"><rect x="232" y="304" width="78" height="116" class="lot"/><polygon points="276,392 304,392 304,414 276,414" class="acc"/><polygon points="242,320 302,320 302,370 242,370" class="house"/><polygon points="245.2,323.2 298.8,323.2 298.8,366.8 245.2,366.8" class="incise"/><path d="M272 323V367" class="incise"/><circle cx="243" cy="314" r="8.5" class="med"/><circle cx="243" cy="314" r="6.6" class="med-ring"/><text x="243" y="317.3" class="t-med" text-anchor="middle">Ι</text><text x="255" y="317.4" class="t-name">Hobnob +1</text></a><a href="#card" class="parcel" aria-label="Lot 25, nobody recorded yet. Add a household"><rect x="310" y="304" width="80" height="116" class="lot"/><polygon points="320,316 380,316 380,360 354,360 354,378 320,378" class="house"/><polygon points="323.34222222222223,319.64731182795697 376.9422222222222,319.64731182795697 376.9422222222222,359.10537634408604 353.71555555555557,359.10537634408604 353.71555555555557,375.247311827957 323.34222222222223,375.247311827957" class="incise"/><circle cx="321" cy="314" r="8" class="med-empty"/><path d="M317.5 314h7M321 310.5v7" class="plus"/><text x="333" y="317.4" class="t-name t-empty">Add</text></a><g transform="translate(40 165) rotate(-8)" class="shard"><polygon points="-14.905000000000001,-7.25 -7.905000000000001,-11.25 4.4715,-9.25 12.905000000000001,-12.25 16.905,6.25 5.905000000000001,11.25 -2.9810000000000003,9.25 -12.905000000000001,11.25"/><text y="3.1" text-anchor="middle" font-size="8.5">MET</text></g><g transform="translate(196 172) rotate(6)" class="shard"><polygon points="-28.08,-7.25 -21.08,-11.25 8.424,-9.25 26.08,-12.25 30.08,6.25 19.08,11.25 -5.616,9.25 -26.08,11.25"/><text y="3.1" text-anchor="middle" font-size="8.5">NEW HERE</text></g><g transform="translate(359 172) rotate(-5)" class="shard"><polygon points="-30.715,-7.25 -23.715,-11.25 9.2145,-9.25 28.715,-12.25 32.715,6.25 21.715,11.25 -6.143000000000001,9.25 -28.715,11.25"/><text y="3.1" text-anchor="middle" font-size="8.5">OUR MOWER</text></g><g transform="translate(106 388) rotate(4)" class="shard"><polygon points="-38.620000000000005,-7.25 -31.620000000000005,-11.25 11.586,-9.25 36.620000000000005,-12.25 40.620000000000005,6.25 29.620000000000005,11.25 -7.724000000000001,9.25 -36.620000000000005,11.25"/><text y="3.1" text-anchor="middle" font-size="8.5">BIRTHDAY SAT</text></g><path d="M100 273L150 251A54 54 0 0 1 150 295z" class="cone"/><path d="M100 273L117 224" class="trav"/><path d="M100 273L116 347" class="trav"/><path d="M100 273L47 221" class="trav"/><path d="M100 273L35 342" class="trav"/><path d="M100 273L198 217" class="trav"/><circle cx="100" cy="273" r="5.5" class="you"/></svg></div><svg class="tondo__ring" viewBox="0 0 290 290" aria-hidden="true"><defs><path id="ringpath" d="M145 6a139 139 0 1 1 0 278a139 139 0 1 1 0-278"/></defs><circle cx="145" cy="145" r="139" fill="none" style="stroke:var(--figure)" stroke-width="10" stroke-dasharray="6 3"/><circle cx="145" cy="145" r="144" fill="none" style="stroke:var(--figure)" stroke-width="1"/></svg>
+<div class="compass" aria-label="Heading east">E<b>088°</b></div></div>
+<section class="sheet" aria-labelledby="near-h"><div class="frieze" aria-hidden="true"><svg viewBox="0 0 390 16" preserveAspectRatio="xMinYMid slice"><rect y="1" width="390" height="14" fill="url(#meander-clay)"/></svg></div><div class="sheet__head"><h2 id="near-h">Near you</h2><p>facing east · ±4 m</p></div>
+<ul class="rows"><li><button class="row is-first" type="button"><span class="rmed" aria-hidden="true">Β</span>
+<span><span class="row__name">Fizzwhistle</span><span class="row__who">Marguerite · <em>pet</em> Admiral Snooze (cat)</span><span class="row__flag">Got a second cat, Pickles</span></span>
+<span class="row__dist"><span class="side"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 8H3M7 3.5L2.5 8 7 12.5"/></svg>Left</span><br>5 m<small>beside you</small></span></button></li><li><button class="row" type="button"><span class="rmed" aria-hidden="true">Η</span>
+<span><span class="row__name">Crumpet</span><span class="row__who">Desmond, Opaline · <em>kids</em> Fig, 9</span><span class="row__flag">Fig turns 10 on Saturday</span></span>
+<span class="row__dist"><span class="side"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 8h11M9 3.5L13.5 8 9 12.5"/></svg>Right</span><br>12 m<small>across</small></span></button></li><li><button class="row" type="button"><span class="rmed" aria-hidden="true">Α</span>
+<span><span class="row__name">Pumpernickel</span><span class="row__who">Barnaby, Clementine · <em>kids</em> Juniper, 8 · Odo, ~5 · <em>pet</em> Waffles (basset)</span></span>
+<span class="row__dist"><span class="side"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 8H3M7 3.5L2.5 8 7 12.5"/></svg>Left</span><br>16 m<small>behind</small></span></button></li><li><button class="row" type="button"><span class="rmed" aria-hidden="true">Ζ</span>
+<span><span class="row__name">Mossbottom</span><span class="row__who">Harriet · <em>pet</em> Sir Reginald (tortoise)</span></span>
+<span class="row__dist"><span class="side"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 8h11M9 3.5L13.5 8 9 12.5"/></svg>Right</span><br>21 m<small>behind</small></span></button></li><li><button class="row" type="button"><span class="rmed" aria-hidden="true">Γ</span>
+<span><span class="row__name">Quillby</span><span class="row__who"><em>No names yet</em></span><span class="row__flag">New move-in. Names not known yet</span></span>
+<span class="row__dist"><span class="side"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 8H3M7 3.5L2.5 8 7 12.5"/></svg>Left</span><br>25 m<small>ahead</small></span></button></li></ul></section><div class="homebar"></div></div><figcaption><b>03 · Near me</b>The map shrinks into a kylix tondo, the round painting inside a drinking cup, centered on you with your heading. Below it, the nearest five households, each with its letter, side of street and distance.</figcaption></figure><figure class="shot"><div class="phone"><div class="island"></div><div class="status" aria-hidden="true"><span class="status__time">9:41</span>
+<svg class="status__icons" width="70" height="12" viewBox="0 0 70 12" fill="currentColor">
+<rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="6" width="3" height="6" rx="1"/>
+<rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/>
+<path d="M30 3.2a10 10 0 0 1 13 0l-1.4 1.5a8 8 0 0 0-10.2 0zM32.6 6a6 6 0 0 1 7.8 0L39 7.5a4 4 0 0 0-5 0zM35 9h3l-1.5 2z"/>
+<rect x="46.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity=".5"/>
+<rect x="48.5" y="2.5" width="15" height="7" rx="1.5"/><rect x="68.5" y="4" width="1.5" height="4" rx=".7" opacity=".5"/>
+</svg></div><div class="bar"><button class="back" type="button">Cancel</button><span style="font:400 17px Marcellus">Check before saving</span>
+<button class="roundbtn" type="button" aria-label="Record again"><svg width="22" height="22" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="7" y="2" width="6" height="10" rx="3"/><path d="M4 9.5a6 6 0 0 0 12 0M10 15.5V18M7 18h6"/></svg></button></div>
+<div class="scroll"><div class="disc"><span class="disc__mic"><svg width="22" height="22" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="7" y="2" width="6" height="10" rx="3"/><path d="M4 9.5a6 6 0 0 0 12 0M10 15.5V18M7 18h6"/></svg></span><div>
+<svg class="wave" viewBox="0 0 180 28" preserveAspectRatio="none" aria-hidden="true"><rect x="0" y="12.0" width="2.6" height="4" rx="1.3" fill="currentColor"/><rect x="5" y="9.5" width="2.6" height="9" rx="1.3" fill="currentColor"/><rect x="10" y="6.5" width="2.6" height="15" rx="1.3" fill="currentColor"/><rect x="15" y="3.0" width="2.6" height="22" rx="1.3" fill="currentColor"/><rect x="20" y="8.0" width="2.6" height="12" rx="1.3" fill="currentColor"/><rect x="25" y="11.0" width="2.6" height="6" rx="1.3" fill="currentColor"/><rect x="30" y="5.0" width="2.6" height="18" rx="1.3" fill="currentColor"/><rect x="35" y="1.0" width="2.6" height="26" rx="1.3" fill="currentColor"/><rect x="40" y="4.0" width="2.6" height="20" rx="1.3" fill="currentColor"/><rect x="45" y="9.0" width="2.6" height="10" rx="1.3" fill="currentColor"/><rect x="50" y="11.0" width="2.6" height="6" rx="1.3" fill="currentColor"/><rect x="55" y="7.0" width="2.6" height="14" rx="1.3" fill="currentColor"/><rect x="60" y="2.0" width="2.6" height="24" rx="1.3" fill="currentColor"/><rect x="65" y="6.0" width="2.6" height="16" rx="1.3" fill="currentColor"/><rect x="70" y="10.0" width="2.6" height="8" rx="1.3" fill="currentColor"/><rect x="75" y="12.0" width="2.6" height="4" rx="1.3" fill="currentColor"/><rect x="80" y="9.0" width="2.6" height="10" rx="1.3" fill="currentColor"/><rect x="85" y="4.0" width="2.6" height="20" rx="1.3" fill="currentColor"/><rect x="90" y="1.0" width="2.6" height="26" rx="1.3" fill="currentColor"/><rect x="95" y="5.0" width="2.6" height="18" rx="1.3" fill="currentColor"/><rect x="100" y="8.0" width="2.6" height="12" rx="1.3" fill="currentColor"/><rect x="105" y="11.0" width="2.6" height="6" rx="1.3" fill="currentColor"/><rect x="110" y="6.0" width="2.6" height="16" rx="1.3" fill="currentColor"/><rect x="115" y="3.0" width="2.6" height="22" rx="1.3" fill="currentColor"/><rect x="120" y="8.0" width="2.6" height="12" rx="1.3" fill="currentColor"/><rect x="125" y="10.0" width="2.6" height="8" rx="1.3" fill="currentColor"/><rect x="130" y="12.0" width="2.6" height="4" rx="1.3" fill="currentColor"/><rect x="135" y="11.0" width="2.6" height="6" rx="1.3" fill="currentColor"/><rect x="140" y="8.0" width="2.6" height="12" rx="1.3" fill="currentColor"/><rect x="145" y="5.0" width="2.6" height="18" rx="1.3" fill="currentColor"/><rect x="150" y="9.0" width="2.6" height="10" rx="1.3" fill="currentColor"/><rect x="155" y="11.0" width="2.6" height="6" rx="1.3" fill="currentColor"/><rect x="160" y="12.0" width="2.6" height="4" rx="1.3" fill="currentColor"/><rect x="165" y="10.0" width="2.6" height="8" rx="1.3" fill="currentColor"/><rect x="170" y="7.0" width="2.6" height="14" rx="1.3" fill="currentColor"/><rect x="175" y="11.0" width="2.6" height="6" rx="1.3" fill="currentColor"/></svg><small><span>0:14</span><span>TRANSCRIBED ON DEVICE</span></small></div></div>
+<div class="tablet"><h3>What you said</h3><mark>Ran into Clementine Pumpernickel<sup>1</sup></mark> walking Waffles.
+<mark>Odo just turned five<sup>2</sup></mark> and <mark>starts kindergarten in the fall<sup>3</sup></mark>. Marguerite next door
+<mark>got a second cat named Pickles<sup>4</sup></mark>. Also <mark class="miss">the guy with the red truck</mark> asked if we're doing the block party again.</div>
+<div class="ops"><h3>Changes to save</h3>
+<div class="op"><label class="chk"><input type="checkbox" checked aria-label="Save: Pumpernickel last talked today"><span></span></label>
+<div><div class="op__k"><i>Α</i>PUMPERNICKEL</div><div class="op__t">Talked <del>6 days ago</del> <ins>today</ins></div><div class="op__ev">1 · "Ran into Clementine Pumpernickel"</div></div></div>
+<div class="op"><label class="chk"><input type="checkbox" checked aria-label="Save: Odo born 2021"><span></span></label>
+<div><div class="op__k"><i>Α</i>PUMPERNICKEL · ODO</div><div class="op__t">Born <del>~2021</del> <ins>2021</ins></div><div class="op__ev">2 · "Odo just turned five"</div></div></div>
+<div class="op"><label class="chk"><input type="checkbox" checked aria-label="Save note on Pumpernickel"><span></span></label>
+<div><div class="op__k"><i>Α</i>PUMPERNICKEL · NOTE</div><div class="op__t"><ins>Odo starts kindergarten in the fall.</ins></div><div class="op__ev">3 · "starts kindergarten in the fall"</div></div></div>
+<div class="op op--warn"><label class="chk"><input type="checkbox" aria-label="Save pet Pickles on Fizzwhistle"><span></span></label>
+<div><div class="op__k"><i>Β</i>FIZZWHISTLE · NEW PET ·</div><div class="op__t"><ins>Pickles, cat</ins></div><div class="op__ev">4 · placed by "next door", not by name</div></div></div>
+<div class="unres"><b>Couldn't place this</b>"the guy with the red truck"<br><button type="button">Pick a house</button></div></div>
+<div class="actions" style="grid-template-columns:1fr 1.6fr"><button class="btn" type="button">Discard</button><button class="btn btn--glaze" type="button">Save 3 changes</button></div></div><div class="homebar"></div></div><figcaption><b>04 · Capture confirm</b>The transcript sits on a clay-slip tablet with each used phrase underlined and numbered. Changes list the household letter, old value struck in clay, new value in Aegean blue. The unplaced phrase lands on a shard.</figcaption></figure>
+</div>
+</main>
+<script>
+(() => {
+  const root = document.documentElement;
+  const buttons = document.querySelectorAll('.theme button');
+  const set = (mode) => {
+    if (mode === 'auto') delete root.dataset.theme; else root.dataset.theme = mode;
+    buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
+  };
+  buttons.forEach((b) => b.addEventListener('click', () => set(b.dataset.mode)));
+})();
+</script><svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<pattern id="meander-fig" width="14" height="14" patternUnits="userSpaceOnUse">
+<path d="M0 .8H14M0 13.2H14M2 13.2V3.2H11.5V10.6H5V6H8.6V8" fill="none" style="stroke:var(--figure)" stroke-width="1.5" stroke-linecap="square"/></pattern><pattern id="meander-on" width="14" height="14" patternUnits="userSpaceOnUse">
+<path d="M0 .8H14M0 13.2H14M2 13.2V3.2H11.5V10.6H5V6H8.6V8" fill="none" style="stroke:var(--on-figure)" stroke-width="1.5" stroke-linecap="square"/></pattern><pattern id="meander-clay" width="14" height="14" patternUnits="userSpaceOnUse">
+<path d="M0 .8H14M0 13.2H14M2 13.2V3.2H11.5V10.6H5V6H8.6V8" fill="none" style="stroke:var(--clay)" stroke-width="1.5" stroke-linecap="square"/></pattern>
+<pattern id="beads" width="12" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.3" style="fill:var(--lot)"/><rect x="7" y="2.4" width="4" height="1.2" style="fill:var(--lot)"/></pattern>
+</defs></svg>
+</body>
+</html>
